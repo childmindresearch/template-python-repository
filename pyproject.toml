@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "app-name"
+version = "0.1.0"
+description = "A beautiful description."
+authors = ["Reinder Vos de Wael <reinder.vosdewael@childmind.org>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "app_name"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
