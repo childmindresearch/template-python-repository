@@ -3,7 +3,7 @@ import pytest
 from APP_NAME import algorithms
 
 
-def test_fibonacci_success_0():
+def test_fibonacci_success_0() -> None:
     """Test that fibonacci() returns the correct value for valid input."""
 
     output = algorithms.fibonacci(0)
@@ -11,7 +11,7 @@ def test_fibonacci_success_0():
     assert output == 0
 
 
-def test_fibonacci_success_18():
+def test_fibonacci_success_18() -> None:
     """Test that fibonacci() returns the correct value for valid input."""
 
     output = algorithms.fibonacci(19)
@@ -19,15 +19,15 @@ def test_fibonacci_success_18():
     assert output == 4181
 
 
-def test_fibonacci_negative():
+def test_fibonacci_negative() -> None:
     """Test that fibonacci() raises an exception for negative input."""
 
     with pytest.raises(ValueError):
         algorithms.fibonacci(-1)
 
 
-def test_fibonacci_non_integer():
+def test_fibonacci_non_integer() -> None:
     """Test that fibonacci() raises an exception for non-integer input."""
 
     with pytest.raises(ValueError):
-        algorithms.fibonacci(3.14)
+        algorithms.fibonacci(3.14)  # type: ignore[arg-type]
