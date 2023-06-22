@@ -5,7 +5,7 @@ description = "A beautiful description."
 authors = ["Reinder Vos de Wael <reinder.vosdewael@childmind.org>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "app_name"}]
+packages = [{include = "src/APP_NAME"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
