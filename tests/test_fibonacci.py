@@ -30,4 +30,4 @@ def test_fibonacci_non_integer() -> None:
     """Test that fibonacci() raises an exception for non-integer input."""
 
     with pytest.raises(ValueError):
-        algorithms.fibonacci(3.14)
+        algorithms.fibonacci(3.14)  # type: ignore[arg-type]
