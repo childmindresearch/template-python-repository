@@ -44,8 +44,9 @@ jobs:
         with:
           python-version: "3.11"
       - run: |
-          pip install mypy 
-          mypy .
+          pip install poetry 
+          poetry install
+          poetry run mypy .
 
   isort:
     runs-on: ubuntu-latest
