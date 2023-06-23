@@ -15,3 +15,4 @@ This is a template repository. Below is a checklist of things you should do to u
 6. Remove the placeholder src and test files, these are there merely to show how the CI works.
 7. Update `pyproject.toml`
 8. Update the name of `src/APP_NAME`
+9. Grant third-party app permissions (e.g. Codecov) [here](https://github.com/organizations/cmi-dair/settings/installations), if necessary.
