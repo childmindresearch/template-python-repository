@@ -16,3 +16,4 @@ This is a template repository. Below is a checklist of things you should do to u
 7. Update `pyproject.toml`
 8. Update the name of `src/APP_NAME`
 9. Grant third-party app permissions (e.g. Codecov) [here](https://github.com/organizations/cmi-dair/settings/installations), if necessary.
+10. Either generate a `CODECOV_TOKEN` secret [here](https://github.com/cmi-dair/flowdump/blob/main/.github/workflows/python_tests.yaml) (if its a private repository) or remove the line `token: ${{ secrets.CODECOV_TOKEN }}`
