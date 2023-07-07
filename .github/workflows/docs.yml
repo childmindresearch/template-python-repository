@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install poetry
-          poetry install -E docs_build
+          poetry install -E docs
       - name: Build docs
         run: |
           poetry run pdoc src/APP_NAME -o docs_build -t docs/pdoc-theme --docformat google
