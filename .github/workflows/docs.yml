@@ -1,5 +1,8 @@
 name: Build and publish docs
 
+permissions:
+  contents: write
+
 on:
   workflow_run:
     workflows: ["Python Tests"]
