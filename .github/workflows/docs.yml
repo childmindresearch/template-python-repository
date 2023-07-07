@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: ["Python Tests"]
     branches:
-      - gen-docs
+      - main
 
 jobs:
   build-and-publish-docs:
