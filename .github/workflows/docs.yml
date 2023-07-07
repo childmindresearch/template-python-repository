@@ -1,6 +1,9 @@
 name: Build and publish docs
 
-on: push
+on:
+  workflow_run:
+    workflows: ["Python Tests"]
+    types: [completed]
 
 jobs:
   build-and-publish-docs:
