@@ -23,7 +23,7 @@ jobs:
           poetry install -E docs
       - name: Build docs
         run: |
-          poetry run pdoc src/APP_NAME -o docs
+          poetry run pdoc src/APP_NAME -o docs --docformat google
           touch docs/.nojekyll
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
