@@ -1,10 +1,6 @@
 name: Build and publish docs
 
-on:
-  workflow_run:
-    workflows: ["Python Tests"]
-    branches:
-      - gen-docs
+on: push
 
 jobs:
   build-and-publish-docs:
