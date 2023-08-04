@@ -36,7 +36,7 @@ What problem does this tool solve?
 Install this package via :
 
 ```sh
-pip install template-python-repository
+pip install APP_NAME
 ```
 
 Or get the newest development version via:
@@ -50,9 +50,9 @@ pip install git+https://github.com/cmi-dair/template-python-repository
 Short tutorial, maybe with a 
 
 ```Python
-import template-python-repository
+import APP_NAME
 
-template-python-repository.short_example()
+APP_NAME.short_example()
 ```
 
 ## Links or References
