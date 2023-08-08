@@ -1,3 +1,3 @@
 """
-This is an example module docstring stub.
+.. include:: ../../README.md
 """
