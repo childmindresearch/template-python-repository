@@ -49,6 +49,9 @@ def main():
                 content = f.read()
 
             content_before = content
+            content = content.replace(
+                "- [ ] Run `setup_template.py`", "- [x] Run `setup_template.py`"
+            )
             content = content.replace("template-python-repository", repo_name)
             content = content.replace("APP_NAME", module_name)
             content = content.replace("app-name", module_name)
