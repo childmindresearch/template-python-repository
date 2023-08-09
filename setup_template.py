@@ -6,6 +6,7 @@ import pathlib as pl
 
 def main():
     # Collect some data
+    git_uncommitted_changes = os.popen("git status -s").read().strip() != ""
     git_username = os.popen("git config user.name").read().strip()
     git_email = os.popen("git config user.email").read().strip()
     git_repo_name = (
@@ -13,6 +14,9 @@ def main():
     )
 
     # Ask for some data
+    if git_uncommitted_changes:
+        print("You have uncommitted changes. Please commit or stash them first.")
+        exit(1)
     repo_name = (
         input(f"Enter the name of the repository [{git_repo_name}]: ") or git_repo_name
     )
@@ -27,10 +31,10 @@ def main():
     # Print the data
     print(
         f"Using the following values:\n"
-        f"\tRepository name: {repo_name}\n"
-        f"\tModule name: {module_name}\n"
-        f"\tAuthor: {username} <{email}>\n"
-        f"\tDescription: {description}"
+        f"\tRepository name: '{repo_name}'\n"
+        f"\tModule name: '{module_name}'\n"
+        f"\tAuthor: '{username} <{email}'>\n"
+        f"\tDescription: '{description}'"
     )
     input("Press enter to continue...")
 
@@ -41,7 +45,6 @@ def main():
             and not file.name == "setup_template.py"
             and file.suffix in [".py", ".md", ".yml", ".yaml", ".toml", ".txt"]
         ):
-            print(f"Processing {file}")
             with open(file, "r") as f:
                 content = f.read()
 
