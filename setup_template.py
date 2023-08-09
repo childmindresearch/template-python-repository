@@ -26,10 +26,10 @@ def main():
 
     # Print the data
     print(
-        f"Using the following values:"
-        f"\tRepository name: {repo_name}"
-        f"\tModule name: {module_name}"
-        f"\tAuthor: {username} <{email}>"
+        f"Using the following values:\n"
+        f"\tRepository name: {repo_name}\n"
+        f"\tModule name: {module_name}\n"
+        f"\tAuthor: {username} <{email}>\n"
         f"\tDescription: {description}"
     )
     input("Press enter to continue...")
