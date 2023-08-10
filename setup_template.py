@@ -5,6 +5,9 @@ import pathlib as pl
 
 
 def main():
+    # Ensure working dir == repo root
+    os.chdir(pl.Path(__file__).parent)
+
     # Collect some data
     git_uncommitted_changes = os.popen("git status -s").read().strip() != ""
     git_username = os.popen("git config user.name").read().strip()
@@ -42,7 +45,7 @@ def main():
     for file in pl.Path(".").glob("**/*"):
         if (
             file.is_file()
-            and not file.name == "setup_template.py"
+            and not file.name == pl.Path(__file__).name
             and file.suffix in [".py", ".md", ".yml", ".yaml", ".toml", ".txt"]
         ):
             with open(file, "r") as f:
@@ -65,8 +68,8 @@ def main():
                 with open(file, "w") as f:
                     f.write(content)
 
-    if pl.Path(f"src/APP_NAME").exists():
-        pl.Path(f"src/APP_NAME").rename(f"src/{module_name}")
+    if pl.Path("src/APP_NAME").exists():
+        pl.Path("src/APP_NAME").rename(f"src/{module_name}")
 
     # Remove this file
     print("Removing setup_template.py")
