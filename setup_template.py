@@ -10,11 +10,16 @@ def main():
     dir_repo = file_self.parent
 
     # Collect some data
-    git_uncommitted_changes = os.popen(f"git -C {dir_repo} status -s").read().strip() != ""
+    git_uncommitted_changes = (
+        os.popen(f"git -C {dir_repo} status -s").read().strip() != ""
+    )
     git_username = os.popen(f"git -C {dir_repo} config user.name").read().strip()
     git_email = os.popen(f"git -C {dir_repo} config user.email").read().strip()
     git_repo_name = (
-        os.popen(f"git -C {dir_repo} remote get-url origin").read().split("/")[-1].split(".")[0]
+        os.popen(f"git -C {dir_repo} remote get-url origin")
+        .read()
+        .split("/")[-1]
+        .split(".")[0]
     )
 
     # Ask for some data
@@ -69,7 +74,7 @@ def main():
                 with open(file, "w") as f:
                     f.write(content)
 
-    dir_module = (dir_repo / "src" / "APP_NAME")
+    dir_module = dir_repo / "src" / "APP_NAME"
     if dir_module.exists():
         dir_module.rename(dir_module.parent / module_name)
 
