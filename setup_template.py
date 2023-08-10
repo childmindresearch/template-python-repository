@@ -74,7 +74,7 @@ def main():
         dir_module.rename(dir_module.parent / module_name)
 
     # Remove this file
-    print("Removing setup_template.py")
+    print(f"Removing {file_self.name}")
     pl.Path(__file__).unlink(missing_ok=True)
 
 
