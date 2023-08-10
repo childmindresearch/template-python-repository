@@ -6,14 +6,15 @@ import pathlib as pl
 
 def main():
     # Ensure working dir == repo root
-    os.chdir(pl.Path(__file__).parent)
+    file_self = pl.Path(__file__)
+    dir_repo = file_self.parent
 
     # Collect some data
-    git_uncommitted_changes = os.popen("git status -s").read().strip() != ""
-    git_username = os.popen("git config user.name").read().strip()
-    git_email = os.popen("git config user.email").read().strip()
+    git_uncommitted_changes = os.popen(f"git -C {dir_repo} status -s").read().strip() != ""
+    git_username = os.popen("git -C {dir_repo} config user.name").read().strip()
+    git_email = os.popen("git -C {dir_repo} config user.email").read().strip()
     git_repo_name = (
-        os.popen("git remote get-url origin").read().split("/")[-1].split(".")[0]
+        os.popen("git -C {dir_repo} remote get-url origin").read().split("/")[-1].split(".")[0]
     )
 
     # Ask for some data
@@ -42,10 +43,10 @@ def main():
     input("Press enter to continue...")
 
     # Replace the template values
-    for file in pl.Path(".").glob("**/*"):
+    for file in pl.Path(dir_repo).glob("**/*"):
         if (
             file.is_file()
-            and not file.name == pl.Path(__file__).name
+            and not file.name == file_self.name
             and file.suffix in [".py", ".md", ".yml", ".yaml", ".toml", ".txt"]
         ):
             with open(file, "r") as f:
@@ -68,8 +69,9 @@ def main():
                 with open(file, "w") as f:
                     f.write(content)
 
-    if pl.Path("src/APP_NAME").exists():
-        pl.Path("src/APP_NAME").rename(f"src/{module_name}")
+    dir_module = (dir_repo / "src" / "APP_NAME")
+    if dir_module.exists():
+        dir_module.rename(dir_module.parent / module_name)
 
     # Remove this file
     print("Removing setup_template.py")
