@@ -2,15 +2,12 @@
 
 This is a template repository. Below is a checklist of things you should do to use it:
 
-- [ ] Rewrite this `README` file, updating the badges as needed.
-- [ ] Update the pre-commit versions in `.pre-commit-config.yaml`.
-- [ ] Install the `pre-commit` hooks.
+- [ ] Run `setup_template.py` to set up the repository.
+- [ ] Rewrite this `README` file.
+- [ ] Update the pre-commit versions in `.pre-commit-config.yaml` and install the `pre-commit` hooks..
 - [ ] Update the `LICENSE` file to your desired license and set the year.
-- [ ] Replace "ENTER_YOUR_EMAIL_ADDRESS" in `CODE_OF_CONDUCT.md`
-- [ ] Replace "ENTER_YOUR_EMAIL_ADDRESS" in `SECURITY.md` and update the supported versions or, if not relevant, delete this file.
+- [ ] Update the supported versions in `SECURITY.md` or, if not relevant, delete this file.
 - [ ] Remove the placeholder src and test files, these are there merely to show how the CI works.
-- [ ] Update `pyproject.toml`
-- [ ] Update the name of `src/APP_NAME`
 - [ ] Grant third-party app permissions (e.g. Codecov) [here](https://github.com/organizations/cmi-dair/settings/installations), if necessary.
 - [ ] Either generate a `CODECOV_TOKEN` secret [here](https://github.com/cmi-dair/flowdump/blob/main/.github/workflows/python_tests.yaml) (if its a private repository) or remove the line `token: ${{ secrets.CODECOV_TOKEN }}`
 - [ ] API docs website: After the first successful build, go to the `Settings` tab of your repository, scroll down to the `GitHub Pages` section, and select `gh-pages` as the source. This will generate a link to your API docs.
