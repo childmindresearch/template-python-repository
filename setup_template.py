@@ -11,10 +11,10 @@ def main():
 
     # Collect some data
     git_uncommitted_changes = os.popen(f"git -C {dir_repo} status -s").read().strip() != ""
-    git_username = os.popen("git -C {dir_repo} config user.name").read().strip()
-    git_email = os.popen("git -C {dir_repo} config user.email").read().strip()
+    git_username = os.popen(f"git -C {dir_repo} config user.name").read().strip()
+    git_email = os.popen(f"git -C {dir_repo} config user.email").read().strip()
     git_repo_name = (
-        os.popen("git -C {dir_repo} remote get-url origin").read().split("/")[-1].split(".")[0]
+        os.popen(f"git -C {dir_repo} remote get-url origin").read().split("/")[-1].split(".")[0]
     )
 
     # Ask for some data
