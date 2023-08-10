@@ -65,7 +65,7 @@ def main():
             content = content.replace("Reinder Vos de Wael", username)
 
             if not content == content_before:
-                print(f"Updating {file}")
+                print(f"Updating {file.relative_to(dir_repo)}")
                 with open(file, "w") as f:
                     f.write(content)
 
