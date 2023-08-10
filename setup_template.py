@@ -73,7 +73,7 @@ def main():
 
     # Remove this file
     print("Removing setup_template.py")
-    pl.Path("setup_template.py").unlink(missing_ok=True)
+    pl.Path(__file__).unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
