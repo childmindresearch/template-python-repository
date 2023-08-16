@@ -22,13 +22,12 @@ jobs:
           python -m pip install poetry
           poetry install
       - name: Run tests
-        run: poetry run pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov-report=xml:coverage.xml --cov=src tests | tee pytest-coverage.txt
-      - name: Pytest coverage comment
-        if: github.event_name == 'pull_request'
-        uses: MishaKav/pytest-coverage-comment@main
-        with:
-          pytest-coverage-path: ./pytest-coverage.txt
-          junitxml-path: ./pytest.xml
+        run: poetry run pytest \
+          --junitxml=pytest.xml \
+          --cov-report=term-missing:skip-covered \
+          --cov-report=xml:coverage.xml \
+          --cov=src tests | \
+          tee pytest-coverage.txt
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
