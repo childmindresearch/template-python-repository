@@ -24,7 +24,9 @@ jobs:
       - name: Run tests
         run: poetry run pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov-report=xml:coverage.xml --cov=src tests | tee pytest-coverage.txt
       - name: Pytest coverage comment
-        if: github.event_name == 'pull_request' && ${{ secrets.CODECOV_TOKEN }} == ''
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        if: github.event_name == 'pull_request' && ${{ env.CODECOV_TOKEN }} == ''
         uses: MishaKav/pytest-coverage-comment@main
         with:
           pytest-coverage-path: ./pytest-coverage.txt
