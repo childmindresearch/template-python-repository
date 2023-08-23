@@ -1,22 +1,24 @@
+""" Setup template for Python repositories. """
 #!/usr/bin python3
-
 import os
 import pathlib as pl
+import shutil
+
+from setup import licenses, settings
+
+DIR_REPO = settings.DIR_REPO
+TARGET_EXTENSIONS = settings.TARGET_EXTENSIONS
 
 
 def main():
-    # Ensure working dir == repo root
-    file_self = pl.Path(__file__)
-    dir_repo = file_self.parent
-
     # Collect some data
     git_uncommitted_changes = (
-        os.popen(f"git -C {dir_repo} status -s").read().strip() != ""
+        os.popen(f"git -C {DIR_REPO} status -s").read().strip() != ""
     )
-    git_username = os.popen(f"git -C {dir_repo} config user.name").read().strip()
-    git_email = os.popen(f"git -C {dir_repo} config user.email").read().strip()
+    git_username = os.popen(f"git -C {DIR_REPO} config user.name").read().strip()
+    git_email = os.popen(f"git -C {DIR_REPO} config user.email").read().strip()
     git_repo_name = (
-        os.popen(f"git -C {dir_repo} remote get-url origin")
+        os.popen(f"git -C {DIR_REPO} remote get-url origin")
         .read()
         .split("/")[-1]
         .split(".")[0]
@@ -36,6 +38,7 @@ def main():
         input("Enter a short description of the project: ")
         or "A beautiful description."
     )
+    repo_license = licenses.request_license()
 
     # Print the data
     print(
@@ -43,44 +46,59 @@ def main():
         f"\tRepository name: '{repo_name}'\n"
         f"\tModule name: '{module_name}'\n"
         f"\tAuthor: '{username} <{email}'>\n"
-        f"\tDescription: '{description}'"
+        f"\tDescription: '{description}'\n"
+        f"\tLicense: '{repo_license['name'] if repo_license else 'No license'}'"
     )
     input("Press enter to continue...")
 
     # Replace the template values
-    for file in pl.Path(dir_repo).glob("**/*"):
+    for file in pl.Path(DIR_REPO).glob("**/*"):
         if (
-            file.is_file()
-            and not file.name == file_self.name
-            and file.suffix in [".py", ".md", ".yml", ".yaml", ".toml", ".txt"]
+            not file.is_file()
+            or not file.suffix in TARGET_EXTENSIONS
+            or file.name == "setup_template.py"
         ):
-            with open(file, "r") as f:
-                content = f.read()
+            continue
 
-            content_before = content
-            content = content.replace(
-                "- [ ] Run `setup_template.py`", "- [x] Run `setup_template.py`"
-            )
-            content = content.replace("template-python-repository", repo_name)
-            content = content.replace("APP_NAME", module_name)
-            content = content.replace("app-name", module_name)
-            content = content.replace("A beautiful description.", description)
-            content = content.replace("reinder.vosdewael@childmind.org", email)
-            content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
-            content = content.replace("Reinder Vos de Wael", username)
+        with open(file, "r", encoding="utf-8") as f:
+            content = f.read()
 
-            if not content == content_before:
-                print(f"Updating {file.relative_to(dir_repo)}")
-                with open(file, "w") as f:
-                    f.write(content)
+        content_before = content
+        content = content.replace(
+            "- [ ] Run `setup_template.py`", "- [x] Run `setup_template.py`"
+        )
+        content = content.replace(
+            "- [ ] Update the `LICENSE`", "- [x] Update the `LICENSE`"
+        )
+        content = content.replace("template-python-repository", repo_name)
+        content = content.replace("APP_NAME", module_name)
+        content = content.replace("app-name", module_name)
+        content = content.replace("A beautiful description.", description)
+        content = content.replace("reinder.vosdewael@childmind.org", email)
+        content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
+        content = content.replace("Reinder Vos de Wael", username)
 
-    dir_module = dir_repo / "src" / "APP_NAME"
+        if not content == content_before:
+            print(f"Updating {file.relative_to(DIR_REPO)}")
+            with open(file, "w", encoding="utf-8") as f:
+                f.write(content)
+
+    licenses.replace_license(repo_license)
+
+    dir_module = DIR_REPO / "src" / "APP_NAME"
     if dir_module.exists():
         dir_module.rename(dir_module.parent / module_name)
 
-    # Remove this file
-    print(f"Removing {file_self.name}")
-    pl.Path(__file__).unlink(missing_ok=True)
+    # Remove setup files
+    print("Removing setup files.")
+    setup_files = pl.Path(DIR_REPO / "setup").glob("*.py")
+    for setup_file in setup_files:
+        pl.Path(DIR_REPO / "setup" / setup_file).unlink()
+    if pl.Path(DIR_REPO / "setup" / "__pycache__").exists():
+        # Use a more robust method to remove the cache directory
+        shutil.rmtree(DIR_REPO / "setup" / "__pycache__")
+    pl.Path(DIR_REPO / "setup").rmdir()
+    pl.Path(__file__).unlink()
 
 
 if __name__ == "__main__":
