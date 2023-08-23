@@ -90,7 +90,7 @@ def main():
         dir_module.rename(dir_module.parent / module_name)
 
     # Remove setup files
-    print(f"Removing {__file__}")
+    print("Removing setup files.")
     setup_files = pl.Path(DIR_REPO / "setup").glob("*.py")
     for setup_file in setup_files:
         pl.Path(DIR_REPO / "setup" / setup_file).unlink()
