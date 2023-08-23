@@ -1,104 +1,13 @@
+""" Setup template for Python repositories. """
 #!/usr/bin python3
-import dataclasses
 import os
 import pathlib as pl
-from datetime import datetime
-from typing import Optional
+import shutil
 
-DIR_REPO = pl.Path(__file__).parent
+from setup import licenses, settings
 
-
-@dataclasses.dataclass
-class LicenseInfo:
-    """A class representing information about a software license.
-
-    Attributes:
-        name: The name of the license.
-        year : The year the license was issued.
-        license_holder: The name of the entity holding the license.
-    """
-
-    path: pl.Path
-    year: Optional[int] = None
-    license_holder: str = ""
-
-    @property
-    def name(self) -> str:
-        """Returns the name of the license."""
-        return self.path.name.split("_", 1)[1]
-
-
-def get_licenses() -> list[pl.Path]:
-    """Returns a list of paths to license files in the 'licenses' directory.
-
-    Returns:
-         A list of paths to license files.
-
-    """
-    license_dir = pl.Path(__file__).parent / "licenses"
-    return list(license_dir.glob("LICENSE_*"))
-
-
-def request_license() -> Optional[LicenseInfo]:
-    """Asks the user to select a license.
-
-    Returns:
-        The path to the selected license.
-
-    """
-    license_paths = get_licenses()
-    license_options = [p.name.split("_", 1)[1] for p in license_paths]
-    print("Available licenses:")
-    print("\t0. Unlicensed")
-    for i, option in enumerate(license_options):
-        print(f"\t{i + 1}. {option}")
-    while True:
-        try:
-            choice = int(input("Enter the number of the license you want to use: "))
-            if choice == 0:
-                return None
-            if 0 < choice <= len(license_paths):
-                repo_license = license_paths[choice - 1]
-                break
-            raise ValueError("Invalid choice. Please try again.")
-        except ValueError:
-            print("Invalid choice. Please try again.")
-
-    if repo_license.name == "LICENSE_MIT":
-        license_holder = input("Who is the holder of the license? ")
-        current_year = datetime.now().year
-        return LicenseInfo(repo_license, current_year, license_holder)
-    return LicenseInfo(repo_license)
-
-
-def replace_license(repo_license: Optional[LicenseInfo]) -> None:
-    """Replaces the license file in the repository with the specified license.
-
-    Args:
-        repo_license: The license to replace the current license with. If None, the current
-            license file will be deleted.
-
-    """
-    license_file = DIR_REPO / "LICENSE"
-    if not repo_license:
-        license_file.unlink()
-    else:
-        repo_license.path.replace(license_file)
-
-    for local_license in get_licenses():
-        local_license.unlink()
-    pl.Path(DIR_REPO / "licenses").rmdir()
-
-    if not repo_license or repo_license.name != "MIT":
-        return
-
-    with open(license_file, "r", encoding="utf-8") as file_buffer:
-        content = file_buffer.read()
-    content = content.replace("[year]", str(repo_license.year))
-    content = content.replace("[fullname]", repo_license.license_holder)
-
-    with open(license_file, "w", encoding="utf-8") as file_buffer:
-        file_buffer.write(content)
+DIR_REPO = settings.DIR_REPO
+TARGET_EXTENSIONS = settings.TARGET_EXTENSIONS
 
 
 def main():
@@ -129,7 +38,7 @@ def main():
         input("Enter a short description of the project: ")
         or "A beautiful description."
     )
-    repo_license = request_license()
+    repo_license = licenses.request_license()
 
     # Print the data
     print(
@@ -138,49 +47,58 @@ def main():
         f"\tModule name: '{module_name}'\n"
         f"\tAuthor: '{username} <{email}'>\n"
         f"\tDescription: '{description}'\n"
-        f"\tLicense: '{repo_license.name if repo_license else 'Unlicensed'}'"
+        f"\tLicense: '{repo_license['name'] if repo_license else 'No license'}'"
     )
     input("Press enter to continue...")
 
     # Replace the template values
     for file in pl.Path(DIR_REPO).glob("**/*"):
         if (
-            file.is_file()
-            and not file.name == __file__
-            and file.suffix in [".py", ".md", ".yml", ".yaml", ".toml", ".txt"]
+            not file.is_file()
+            or not file.suffix in TARGET_EXTENSIONS
+            or file.name == "setup_template.py"
         ):
-            with open(file, "r", encoding="utf-8") as f:
-                content = f.read()
+            continue
 
-            content_before = content
-            content = content.replace(
-                "- [ ] Run `setup_template.py`", "- [x] Run `setup_template.py`"
-            )
-            content = content.replace(
-                "- [ ] Update the `LICENSE`", "- [x] Update the `LICENSE`"
-            )
-            content = content.replace("template-python-repository", repo_name)
-            content = content.replace("APP_NAME", module_name)
-            content = content.replace("app-name", module_name)
-            content = content.replace("A beautiful description.", description)
-            content = content.replace("reinder.vosdewael@childmind.org", email)
-            content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
-            content = content.replace("Reinder Vos de Wael", username)
+        with open(file, "r", encoding="utf-8") as f:
+            content = f.read()
 
-            if not content == content_before:
-                print(f"Updating {file.relative_to(DIR_REPO)}")
-                with open(file, "w", encoding="utf-8") as f:
-                    f.write(content)
+        content_before = content
+        content = content.replace(
+            "- [ ] Run `setup_template.py`", "- [x] Run `setup_template.py`"
+        )
+        content = content.replace(
+            "- [ ] Update the `LICENSE`", "- [x] Update the `LICENSE`"
+        )
+        content = content.replace("template-python-repository", repo_name)
+        content = content.replace("APP_NAME", module_name)
+        content = content.replace("app-name", module_name)
+        content = content.replace("A beautiful description.", description)
+        content = content.replace("reinder.vosdewael@childmind.org", email)
+        content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
+        content = content.replace("Reinder Vos de Wael", username)
 
-    replace_license(repo_license)
+        if not content == content_before:
+            print(f"Updating {file.relative_to(DIR_REPO)}")
+            with open(file, "w", encoding="utf-8") as f:
+                f.write(content)
+
+    licenses.replace_license(repo_license)
 
     dir_module = DIR_REPO / "src" / "APP_NAME"
     if dir_module.exists():
         dir_module.rename(dir_module.parent / module_name)
 
-    # Remove this file
+    # Remove setup files
     print(f"Removing {__file__}")
-    pl.Path(__file__).unlink(missing_ok=True)
+    setup_files = pl.Path(DIR_REPO / "setup").glob("*.py")
+    for setup_file in setup_files:
+        pl.Path(DIR_REPO / "setup" / setup_file).unlink()
+    if pl.Path(DIR_REPO / "setup" / "__pycache__").exists():
+        # Use a more robust method to remove the cache directory
+        shutil.rmtree(DIR_REPO / "setup" / "__pycache__")
+    pl.Path(DIR_REPO / "setup").rmdir()
+    pl.Path(__file__).unlink()
 
 
 if __name__ == "__main__":
