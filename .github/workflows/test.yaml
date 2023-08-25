@@ -24,11 +24,11 @@ jobs:
         id: run-tests
         continue-on-error: true
         run: >
-          poetry run pytest \
-            --junitxml=pytest.xml \
-            --cov-report=term-missing:skip-covered \
-            --cov-report=xml:coverage.xml \
-            --cov=src tests \
+          poetry run pytest
+            --junitxml=pytest.xml
+            --cov-report=term-missing:skip-covered
+            --cov-report=xml:coverage.xml
+            --cov=src tests
             > ./pytest-coverage.txt;
           cat ./pytest-coverage.txt;
       - name: Upload pytest coverage artifacts.
