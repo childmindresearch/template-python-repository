@@ -32,12 +32,12 @@ jobs:
             > ./pytest-coverage.txt;
           cat ./pytest-coverage.txt;
       - name: Upload pytest coverage artifacts.
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pytest-coverage
           path: ./pytest-coverage.txt
       - name: Upload pytest junitxml artifacts.
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pytest-junitxml
           path: pytest.xml
@@ -54,11 +54,11 @@ jobs:
       pull-requests: write
     steps:
       - name: Get pytest artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: pytest-coverage
       - name: Get pytest junitxml artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: pytest-junitxml
       - name: Pytest coverage comment
