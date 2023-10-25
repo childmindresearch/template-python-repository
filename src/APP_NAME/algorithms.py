@@ -1,3 +1,6 @@
+"""Example functions for APP_NAME."""
+
+
 def fibonacci(n: int) -> int:
     """Return the n-th Fibonacci number.
 

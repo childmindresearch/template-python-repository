@@ -1,4 +1,4 @@
-""" Functions for fetching and replacing the license file. """
+"""Functions for fetching and replacing the license file."""
 from __future__ import annotations
 
 import json
@@ -33,7 +33,7 @@ def modify_license_placeholder_text(selected_license: dict[str, str]) -> dict[st
     """Modifies the placeholder text in the license.
 
     Args:
-        license: The license to modify.
+        selected_license: The license to modify.
 
     Returns:
         The modified license.
@@ -43,10 +43,12 @@ def modify_license_placeholder_text(selected_license: dict[str, str]) -> dict[st
         license_holder = input("Who is the holder of the license? ")
         current_year = datetime.now().year
         selected_license["body"] = selected_license["body"].replace(
-            "[year]", str(current_year)
+            "[year]",
+            str(current_year),
         )
         selected_license["body"] = selected_license["body"].replace(
-            "[fullname]", license_holder
+            "[fullname]",
+            license_holder,
         )
 
     return selected_license
@@ -83,8 +85,8 @@ def replace_license(repo_license: Optional[dict[str, str]]) -> None:
     """Replaces the license file in the repository with the specified license.
 
     Args:
-        repo_license: The license to replace the current license with. If None, the current
-            license file will be deleted.
+        repo_license: The license to replace the current license with. If None,
+        the current license file will be deleted.
 
     """
     license_file = DIR_REPO / "LICENSE"

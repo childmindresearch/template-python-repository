@@ -1,5 +1,5 @@
-""" Setup template for Python repositories. """
 #!/usr/bin python3
+"""Setup template for Python repositories."""
 import os
 import pathlib as pl
 import shutil
@@ -10,7 +10,13 @@ DIR_REPO = settings.DIR_REPO
 TARGET_EXTENSIONS = settings.TARGET_EXTENSIONS
 
 
-def main():
+def main() -> None:
+    """Entrypoint to the template setup script.
+
+    This script will ask the user for details of the repository and then replace
+    the template values with the user input. It will also remove the setup files
+    and the setup directory.
+    """
     # Collect some data
     git_uncommitted_changes = (
         os.popen(f"git -C {DIR_REPO} status -s").read().strip() != ""
@@ -47,7 +53,7 @@ def main():
         f"\tModule name: '{module_name}'\n"
         f"\tAuthor: '{username} <{email}'>\n"
         f"\tDescription: '{description}'\n"
-        f"\tLicense: '{repo_license['name'] if repo_license else 'No license'}'"
+        f"\tLicense: '{repo_license['name'] if repo_license else 'No license'}'",
     )
     input("Press enter to continue...")
 
@@ -55,20 +61,22 @@ def main():
     for file in pl.Path(DIR_REPO).glob("**/*"):
         if (
             not file.is_file()
-            or not file.suffix in TARGET_EXTENSIONS
+            or file.suffix not in TARGET_EXTENSIONS
             or file.name == "setup_template.py"
         ):
             continue
 
-        with open(file, "r", encoding="utf-8") as f:
+        with open(file, encoding="utf-8") as f:
             content = f.read()
 
         content_before = content
         content = content.replace(
-            "- [ ] Run `setup_template.py`", "- [x] Run `setup_template.py`"
+            "- [ ] Run `setup_template.py`",
+            "- [x] Run `setup_template.py`",
         )
         content = content.replace(
-            "- [ ] Update the `LICENSE`", "- [x] Update the `LICENSE`"
+            "- [ ] Update the `LICENSE`",
+            "- [x] Update the `LICENSE`",
         )
         content = content.replace("template-python-repository", repo_name)
         content = content.replace("APP_NAME", module_name)
@@ -78,7 +86,7 @@ def main():
         content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
         content = content.replace("Reinder Vos de Wael", username)
 
-        if not content == content_before:
+        if content != content_before:
             print(f"Updating {file.relative_to(DIR_REPO)}")
             with open(file, "w", encoding="utf-8") as f:
                 f.write(content)
