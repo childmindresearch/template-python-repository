@@ -4,7 +4,7 @@ This is a template repository. Below is a checklist of things you should do to u
 
 - [ ] Run `setup_template.py` to set up the repository.
 - [ ] Rewrite this `README` file.
-- [ ] Update the pre-commit versions in `.pre-commit-config.yaml` and install the `pre-commit` hooks..
+- [ ] Install the `pre-commit` hooks.
 - [ ] Update the `LICENSE` file to your desired license and set the year.
 - [ ] Update the supported versions in `SECURITY.md` or, if not relevant, delete this file.
 - [ ] Remove the placeholder src and test files, these are there merely to show how the CI works.
