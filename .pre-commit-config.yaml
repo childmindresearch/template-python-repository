@@ -47,8 +47,8 @@ repos:
 
   - repo: local
     hooks:
-      - id: yaml-file-extension
-        name: Check if YAML files has *.yaml extension.
-        entry: YAML filenames must have .yaml extension.
-        language: fail
-        files: .yml$
+    - id: yaml-file-extension
+      name: Prefer .yaml over .yml.
+      entry: YAML files must have .yaml extension.
+      language: fail
+      files: .yml$
