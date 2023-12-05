@@ -44,3 +44,11 @@ repos:
   - id: check-yaml
   - id: check-json
   - id: check-toml
+
+  - repo: local
+    hooks:
+      - id: yaml-file-extension
+        name: Check if YAML files has *.yaml extension.
+        entry: YAML filenames must have .yaml extension.
+        language: fail
+        files: .yml$
