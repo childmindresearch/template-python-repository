@@ -90,8 +90,8 @@ def main() -> None:
         if repo_license is not None:
             license_name_upper = repo_license["key"].upper()
             content = content.replace(
-                "![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)]", 
-                f"![{license_name_upper} License](https://img.shields.io/badge/license-{license_name_upper}-blue.svg)]"
+                "![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)]",
+                f"![{license_name_upper} License](https://img.shields.io/badge/license-{license_name_upper}-blue.svg)]",
             )
         else:
             # remove line containing license badge
