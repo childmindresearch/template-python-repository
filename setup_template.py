@@ -85,10 +85,10 @@ def main() -> None:
         content = content.replace("reinder.vosdewael@childmind.org", email)
         content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
         content = content.replace("Reinder Vos de Wael", username)
-        license_name_upper = repo_license['key'].upper()
+        license_name_upper = repo_license["key"].upper()
         content = content.replace(
-            "![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)]", 
-            f"![{license_name_upper} License](https://img.shields.io/badge/license-{license_name_upper}-blue.svg)]"
+            "![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)]",
+            f"![{license_name_upper} License](https://img.shields.io/badge/license-{license_name_upper}-blue.svg)]",
         )
 
         if content != content_before:
