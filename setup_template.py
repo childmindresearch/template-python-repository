@@ -87,19 +87,7 @@ def main() -> None:
         content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
         content = content.replace("Reinder Vos de Wael", username)
 
-        if repo_license is not None:
-            license_name_upper = repo_license["key"].upper()
-            content = content.replace(
-                "![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)]", 
-                f"![{license_name_upper} License](https://img.shields.io/badge/license-{license_name_upper}-blue.svg)]"
-            )
-        else:
-            # remove line containing license badge
-            content = re.sub(
-                r"\[!\[.*License\]\(https://img\.shields\.io/badge/license.*\)\]\(.*\)\n",
-                "",
-                content,
-            )
+        content = licenses.replace_license_badge(content, repo_license)
 
         if content != content_before:
             print(f"Updating {file.relative_to(DIR_REPO)}")
