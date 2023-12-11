@@ -2,10 +2,10 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime
 from typing import Optional
 from urllib import request
-import re
 
 from setup import settings
 

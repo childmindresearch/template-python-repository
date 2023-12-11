@@ -2,7 +2,6 @@
 """Setup template for Python repositories."""
 import os
 import pathlib as pl
-import re
 import shutil
 
 from setup import licenses, settings
