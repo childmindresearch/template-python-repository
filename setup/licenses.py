@@ -89,7 +89,7 @@ def replace_license_badge(content: str, repo_license: Optional[dict[str, str]]) 
         content: Content of any file that might contain a license badge.
         repo_license: The license to replace the current license with. If None,
         the current license badge will be deleted.
-    
+
     Returns:
         The content with the license badge replaced.
     """
@@ -103,8 +103,7 @@ def replace_license_badge(content: str, repo_license: Optional[dict[str, str]]) 
     # shield.io uses -- as an escape character, so we need to replace - with --
     license_name_upper = repo_license["key"].upper().replace("-", "--")
     return content.replace(
-        "![MIT License]"
-        "(https://img.shields.io/badge/license-MIT-blue.svg)]",
+        "![MIT License]" "(https://img.shields.io/badge/license-MIT-blue.svg)]",
         f"![{license_name_upper} License]"
         f"(https://img.shields.io/badge/license-{license_name_upper}-blue.svg)]",
     )
