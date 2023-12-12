@@ -86,6 +86,8 @@ def main() -> None:
         content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
         content = content.replace("Reinder Vos de Wael", username)
 
+        content = licenses.replace_license_badge(content, repo_license)
+
         if content != content_before:
             print(f"Updating {file.relative_to(DIR_REPO)}")
             with open(file, "w", encoding="utf-8") as f:
