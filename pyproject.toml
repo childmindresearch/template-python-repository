@@ -27,6 +27,9 @@ docs = ["pdoc"]
 pythonpath = [
   "src"
 ]
+testpaths = [
+  "tests"
+]
 
 [tool.mypy]
 ignore_missing_imports = true

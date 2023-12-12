@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime
 from typing import Optional
 from urllib import request
@@ -79,6 +80,33 @@ def request_license() -> Optional[dict[str, str]]:
 
     final_license = modify_license_placeholder_text(selected_license)
     return final_license
+
+
+def replace_license_badge(content: str, repo_license: Optional[dict[str, str]]) -> str:
+    """Replaces the license badge with the specified license.
+
+    Args:
+        content: Content of any file that might contain a license badge.
+        repo_license: The license to replace the current license with. If None,
+        the current license badge will be deleted.
+
+    Returns:
+        The content with the license badge replaced.
+    """
+    if repo_license is None:
+        # remove line containing license badge
+        return re.sub(
+            r"\[!\[.*License\]\(https://img\.shields\.io/badge/license.*\)\]\(.*\)\n",
+            "",
+            content,
+        )
+    # shield.io uses -- as an escape character, so we need to replace - with --
+    license_name_upper = repo_license["key"].upper().replace("-", "--")
+    return content.replace(
+        "![MIT License]" "(https://img.shields.io/badge/license-MIT-blue.svg)]",
+        f"![{license_name_upper} License]"
+        f"(https://img.shields.io/badge/license-{license_name_upper}-blue.svg)]",
+    )
 
 
 def replace_license(repo_license: Optional[dict[str, str]]) -> None:
