@@ -32,9 +32,7 @@ jobs:
           --verbose
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-
+      
   ruff:
     runs-on: ubuntu-latest
     steps:
