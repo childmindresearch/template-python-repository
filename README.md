@@ -19,7 +19,7 @@ Welcome to the CMI-DAIR Template Python Repository! This template is designed to
 [![Build](https://github.com/cmi-dair/template-python-repository/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/cmi-dair/template-python-repository/actions/workflows/test.yaml?query=branch%3Amain)
 [![codecov](https://codecov.io/gh/cmi-dair/template-python-repository/branch/main/graph/badge.svg?token=22HWWFWPW5)](https://codecov.io/gh/cmi-dair/template-python-repository)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
+![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cmi-dair/template-python-repository/blob/main/LICENSE)
 [![pages](https://img.shields.io/badge/api-docs-blue)](https://cmi-dair.github.io/template-python-repository)
 
