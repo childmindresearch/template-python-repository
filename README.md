@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/657341621.svg)](https://zenodo.org/doi/10.5281/zenodo.10383685)
+
 # CMI-DAIR Template Python Repository
 
 Welcome to the CMI-DAIR Template Python Repository! This template is designed to streamline your project setup and ensure a consistent structure. To get started, follow these steps:
