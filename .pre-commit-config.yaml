@@ -7,6 +7,7 @@ repos:
   - id: poetry-check
   - id: poetry-lock
     language_version: python3.11
+    args: [-vvv]
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.1.8
