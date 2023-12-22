@@ -20,9 +20,6 @@ ruff = "^0.1.7"
 [tool.poetry.group.docs.dependencies]
 pdoc = "^14.1.0"
 
-[tool.poetry.extras]
-docs = ["pdoc"]
-
 [tool.pytest.ini_options]
 pythonpath = [
   "src"
