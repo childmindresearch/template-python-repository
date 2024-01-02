@@ -18,7 +18,7 @@ pytest-cov = "^4.1.0"
 ruff = "^0.1.7"
 
 [tool.poetry.group.docs.dependencies]
-pdoc = "^14.1.0"
+pdoc = "^14.3.0"
 
 [tool.pytest.ini_options]
 pythonpath = [
