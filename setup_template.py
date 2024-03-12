@@ -1,5 +1,6 @@
 #!/usr/bin python3
 """Setup template for Python repositories."""
+
 import os
 import pathlib as pl
 import shutil
