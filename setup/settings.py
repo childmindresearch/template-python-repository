@@ -1,4 +1,5 @@
 """Constants for the setup module."""
+
 import pathlib as pl
 
 DIR_REPO = pl.Path(__file__).parent.parent

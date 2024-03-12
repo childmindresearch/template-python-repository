@@ -1,4 +1,5 @@
 """Tests for the fibonacci() function."""
+
 import pytest
 
 from APP_NAME import algorithms

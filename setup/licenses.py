@@ -1,4 +1,5 @@
 """Functions for fetching and replacing the license file."""
+
 from __future__ import annotations
 
 import json
