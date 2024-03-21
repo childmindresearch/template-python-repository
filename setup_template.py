@@ -37,9 +37,12 @@ def main() -> None:
         print("You have uncommitted changes. Please commit or stash them first.")
         exit(1)
     repo_name = (
-        input(f"Enter the name of the repository [{git_repo_name}]: ").strip() or git_repo_name
+        input(f"Enter the name of the repository [{git_repo_name}]: ").strip()
+        or git_repo_name
     )
-    module_name = input(f"Enter the name of the module [{repo_name}]: ").strip() or repo_name
+    module_name = (
+        input(f"Enter the name of the module [{repo_name}]: ").strip() or repo_name
+    )
     username = input(f"Enter your username [{git_username}]: ").strip() or git_username
     email = input(f"Enter your email [{git_email}]: ").strip() or git_email
     description = (
