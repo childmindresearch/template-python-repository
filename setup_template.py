@@ -29,6 +29,7 @@ def main() -> None:
         .read()
         .split("/")[-1]
         .split(".")[0]
+        .strip()
     )
 
     # Ask for some data
@@ -36,13 +37,16 @@ def main() -> None:
         print("You have uncommitted changes. Please commit or stash them first.")
         exit(1)
     repo_name = (
-        input(f"Enter the name of the repository [{git_repo_name}]: ") or git_repo_name
+        input(f"Enter the name of the repository [{git_repo_name}]: ").strip()
+        or git_repo_name
     )
-    module_name = input(f"Enter the name of the module [{repo_name}]: ") or repo_name
-    username = input(f"Enter your username [{git_username}]: ") or git_username
-    email = input(f"Enter your email [{git_email}]: ") or git_email
+    module_name = (
+        input(f"Enter the name of the module [{repo_name}]: ").strip() or repo_name
+    )
+    username = input(f"Enter your username [{git_username}]: ").strip() or git_username
+    email = input(f"Enter your email [{git_email}]: ").strip() or git_email
     description = (
-        input("Enter a short description of the project: ")
+        input("Enter a short description of the project: ").strip()
         or "A beautiful description."
     )
     repo_license = licenses.request_license()
@@ -88,6 +92,9 @@ def main() -> None:
         content = content.replace("Reinder Vos de Wael", username)
 
         content = licenses.replace_license_badge(content, repo_license)
+        content = content.replace(
+            "LGPL-2.1", repo_license["name"] if repo_license else ""
+        )
 
         if content != content_before:
             print(f"Updating {file.relative_to(DIR_REPO)}")
