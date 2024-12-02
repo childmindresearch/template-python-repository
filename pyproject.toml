@@ -15,7 +15,7 @@ pytest = "^8.3.3"
 mypy = "^1.13.0"
 pre-commit = "^4.0.1"
 pytest-cov = "^6.0.0"
-ruff = "^0.7.2"
+ruff = "^0.8.1"
 
 [tool.poetry.group.docs.dependencies]
 pdoc = "^15.0.0"
@@ -39,10 +39,7 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["ANN", "D", "E", "F", "I"]
-ignore = [
-  "ANN101",  # self should not be annotated.
-  "ANN102"  # cls should not be annotated.
-]
+ignore = []
 fixable = ["ALL"]
 unfixable = []
 
