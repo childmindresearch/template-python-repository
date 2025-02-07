@@ -40,8 +40,10 @@ def main() -> None:
         input(f"Enter the name of the repository [{git_repo_name}]: ").strip()
         or git_repo_name
     )
+    default_module_name = repo_name.replace("-", "_")
     module_name = (
-        input(f"Enter the name of the module [{repo_name}]: ").strip() or repo_name
+        input(f"Enter the name of the module [{default_module_name}]: ").strip()
+        or default_module_name
     )
     username = input(f"Enter your username [{git_username}]: ").strip() or git_username
     email = input(f"Enter your email [{git_email}]: ").strip() or git_email
@@ -58,7 +60,7 @@ def main() -> None:
         f"\tModule name: '{module_name}'\n"
         f"\tAuthor: '{username} <{email}'>\n"
         f"\tDescription: '{description}'\n"
-        f"\tLicense: '{repo_license['name'] if repo_license else 'No license'}'",
+        f"\tLicense: '{repo_license['spdx_id'] if repo_license else 'No license'}'",
     )
     input("Press enter to continue...")
 
