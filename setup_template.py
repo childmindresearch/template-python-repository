@@ -93,7 +93,7 @@ def main() -> None:
 
         content = licenses.replace_license_badge(content, repo_license)
         content = content.replace(
-            "LGPL-2.1", repo_license["name"] if repo_license else ""
+            "LGPL-2.1", repo_license["spdx_id"] if repo_license else ""
         )
 
         if content != content_before:
