@@ -42,6 +42,7 @@ repos:
     - --autofix
     - --indent=4
     - --no-sort-keys
+    exclude_types: [jupyter]
   - id: check-merge-conflict
   - id: check-yaml
   - id: check-json
