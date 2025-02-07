@@ -109,7 +109,7 @@ def replace_license_badge(content: str, repo_license: Optional[dict[str, str]]) 
     # shield.io uses -- as an escape character, so we need to replace - with --
     license_name_upper = repo_license["key"].upper().replace("-", "--")
     return content.replace(
-        "![MIT License]" "(https://img.shields.io/badge/license-MIT-blue.svg)]",
+        "![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)]",
         f"![{license_name_upper} License]"
         f"(https://img.shields.io/badge/license-{license_name_upper}-blue.svg)]",
     )
