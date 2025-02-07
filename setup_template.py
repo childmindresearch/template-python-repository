@@ -87,7 +87,7 @@ def main() -> None:
         )
         content = content.replace("template-python-repository", repo_name)
         content = content.replace("APP_NAME", module_name)
-        content = content.replace("app-name", module_name)
+        content = content.replace("app-name", repo_name)
         content = content.replace("A beautiful description.", description)
         content = content.replace("reinder.vosdewael@childmind.org", email)
         content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
@@ -105,7 +105,7 @@ def main() -> None:
 
     licenses.replace_license(repo_license)
 
-    dir_module = DIR_REPO / "src" / "APP_NAME"
+    dir_module = DIR_REPO / "src" / "app_name"
     if dir_module.exists():
         dir_module.rename(dir_module.parent / module_name)
 
