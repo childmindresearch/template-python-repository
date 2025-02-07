@@ -69,7 +69,12 @@ def request_license() -> Optional[dict[str, str]]:
         print(f"\t{i + 1}. {option}")
     while True:
         try:
-            choice = int(input("Enter the number of the license you want to use: "))
+            choice = int(
+                input(
+                    "Enter the number of the license you want to use "
+                    "(default: lgpl-2.1): "
+                )
+            )
             if choice == 0:
                 return None
             if 0 < choice <= len(LICENSES):

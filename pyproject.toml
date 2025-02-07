@@ -1,32 +1,28 @@
-[tool.poetry]
+[project]
 name = "app-name"
 version = "0.1.0"
 description = "A beautiful description."
-authors = ["Reinder Vos de Wael <reinder.vosdewael@childmind.org>"]
+authors = [
+  {name = "Reinder Vos de Wael", email = "reinder.vosdewael@childmind.org"}
+]
 license = "LGPL-2.1"
 readme = "README.md"
-packages = [{include = "APP_NAME", from = "src"}]
+requires-python = ">=3.12"
+dependencies = []
 
-[tool.poetry.dependencies]
-python = "~3.11"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.3.3"
-mypy = "^1.13.0"
-pre-commit = "^4.0.1"
-pytest-cov = "^6.0.0"
-ruff = "^0.8.1"
-
-[tool.poetry.group.docs.dependencies]
-pdoc = "^15.0.0"
+[dependency-groups]
+dev = [
+  "pytest>=8.3.4",
+  "mypy>=1.13.0",
+  "pre-commit>=4.0.1",
+  "pytest-cov>=6.0.0",
+  "ruff>=0.8.1"
+]
+docs = ["pdoc>=15.0.0"]
 
 [tool.pytest.ini_options]
-pythonpath = [
-  "src"
-]
-testpaths = [
-  "tests"
-]
+pythonpath = ["src"]
+testpaths = ["tests"]
 
 [tool.mypy]
 ignore_missing_imports = true
@@ -35,7 +31,7 @@ ignore_missing_imports = true
 line-length = 88
 indent-width = 4
 src = ["src"]
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["ANN", "D", "E", "F", "I"]
@@ -50,5 +46,5 @@ convention = "google"
 "tests/**/*.py" = []
 
 [build-system]
-requires = ["poetry-core>=1.2.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
