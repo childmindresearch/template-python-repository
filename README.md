@@ -4,7 +4,6 @@
 
 Welcome to the CMI-DAIR Template Python Repository! This template is designed to streamline your project setup and ensure a consistent structure. To get started, follow these steps:
 
-
 - [ ] Run `setup_template.py` to initialize the repository.
 - [ ] Replace the content of this `README.md` with details specific to your project.
 - [ ] Install the `pre-commit` hooks to ensure code quality on each commit.
