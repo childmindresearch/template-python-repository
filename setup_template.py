@@ -86,7 +86,7 @@ def main() -> None:
             "- [x] Update the `LICENSE`",
         )
         content = content.replace("template-python-repository", repo_name)
-        content = content.replace("APP_NAME", module_name)
+        content = content.replace("app_name", module_name)
         content = content.replace("app-name", repo_name)
         content = content.replace("A beautiful description.", description)
         content = content.replace("reinder.vosdewael@childmind.org", email)

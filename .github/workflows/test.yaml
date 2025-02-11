@@ -12,11 +12,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install uv
-      uses: astral-sh/setup-uv@v3
-    - name: Setup python
-      run: uv python install
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: pyproject.toml
     - name: Install the project
-      run: uv sync --all-extras --dev
+      run: uv sync --only-dev
     - name: Run tests
       id: run-tests
       run: >
@@ -38,11 +42,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install uv
-      uses: astral-sh/setup-uv@v3
-    - name: Setup python
-      run: uv python install
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: pyproject.toml
     - name: Install the project
-      run: uv sync --all-extras --dev
+      run: uv sync --only-dev
     - name: Ruff format
       run: uv run ruff format --check
     - name: Ruff check
@@ -53,10 +61,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install uv
-      uses: astral-sh/setup-uv@v3
-    - name: Setup python
-      run: uv python install
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: pyproject.toml
     - name: Install the project
-      run: uv sync --all-extras --dev
+      run: uv sync --only-dev
     - run: |
         uv run mypy .
