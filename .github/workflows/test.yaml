@@ -11,19 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install poetry
-      run: pipx install poetry
-    - uses: actions/setup-python@v5
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
         python-version-file: pyproject.toml
-        cache: poetry
-    - name: Install dependencies
-      run: |
-        poetry install
+    - name: Install the project
+      run: uv sync --only-dev
     - name: Run tests
       id: run-tests
       run: >
-        poetry run pytest \
+        uv run pytest \
           --junitxml=pytest.xml \
           --cov-report=term-missing:skip-covered \
           --cov-report=xml:coverage.xml \
@@ -40,30 +41,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install poetry
-      run: pipx install poetry
-    - uses: actions/setup-python@v5
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
         python-version-file: pyproject.toml
-        cache: poetry
-    - name: Install dependencies
-      run: |
-        poetry install
+    - name: Install the project
+      run: uv sync --only-dev
     - name: Ruff format
-      run: poetry run ruff format --check
+      run: uv run ruff format --check
     - name: Ruff check
-      run: poetry run ruff check
+      run: uv run ruff check
 
   mypy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install poetry
-      run: pipx install poetry
-    - uses: actions/setup-python@v5
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
       with:
-        python-version: '3.11'
-        cache: poetry
+        enable-cache: true
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: pyproject.toml
+    - name: Install the project
+      run: uv sync --only-dev
     - run: |
-        poetry install
-        poetry run mypy .
+        uv run mypy .

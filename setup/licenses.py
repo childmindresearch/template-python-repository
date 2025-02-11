@@ -69,7 +69,12 @@ def request_license() -> Optional[dict[str, str]]:
         print(f"\t{i + 1}. {option}")
     while True:
         try:
-            choice = int(input("Enter the number of the license you want to use: "))
+            choice = int(
+                input(
+                    "Enter the number of the license you want to use "
+                    "(default: lgpl-2.1): "
+                )
+            )
             if choice == 0:
                 return None
             if 0 < choice <= len(LICENSES):
@@ -104,7 +109,7 @@ def replace_license_badge(content: str, repo_license: Optional[dict[str, str]]) 
     # shield.io uses -- as an escape character, so we need to replace - with --
     license_name_upper = repo_license["key"].upper().replace("-", "--")
     return content.replace(
-        "![MIT License]" "(https://img.shields.io/badge/license-MIT-blue.svg)]",
+        "![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)]",
         f"![{license_name_upper} License]"
         f"(https://img.shields.io/badge/license-{license_name_upper}-blue.svg)]",
     )

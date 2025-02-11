@@ -40,8 +40,10 @@ def main() -> None:
         input(f"Enter the name of the repository [{git_repo_name}]: ").strip()
         or git_repo_name
     )
+    default_module_name = repo_name.replace("-", "_")
     module_name = (
-        input(f"Enter the name of the module [{repo_name}]: ").strip() or repo_name
+        input(f"Enter the name of the module [{default_module_name}]: ").strip()
+        or default_module_name
     )
     username = input(f"Enter your username [{git_username}]: ").strip() or git_username
     email = input(f"Enter your email [{git_email}]: ").strip() or git_email
@@ -58,7 +60,7 @@ def main() -> None:
         f"\tModule name: '{module_name}'\n"
         f"\tAuthor: '{username} <{email}'>\n"
         f"\tDescription: '{description}'\n"
-        f"\tLicense: '{repo_license['name'] if repo_license else 'No license'}'",
+        f"\tLicense: '{repo_license['spdx_id'] if repo_license else 'No license'}'",
     )
     input("Press enter to continue...")
 
@@ -84,8 +86,8 @@ def main() -> None:
             "- [x] Update the `LICENSE`",
         )
         content = content.replace("template-python-repository", repo_name)
-        content = content.replace("APP_NAME", module_name)
-        content = content.replace("app-name", module_name)
+        content = content.replace("app_name", module_name)
+        content = content.replace("app-name", repo_name)
         content = content.replace("A beautiful description.", description)
         content = content.replace("reinder.vosdewael@childmind.org", email)
         content = content.replace("ENTER_YOUR_EMAIL_ADDRESS", email)
@@ -93,7 +95,7 @@ def main() -> None:
 
         content = licenses.replace_license_badge(content, repo_license)
         content = content.replace(
-            "LGPL-2.1", repo_license["name"] if repo_license else ""
+            "LGPL-2.1", repo_license["spdx_id"] if repo_license else ""
         )
 
         if content != content_before:
@@ -103,7 +105,7 @@ def main() -> None:
 
     licenses.replace_license(repo_license)
 
-    dir_module = DIR_REPO / "src" / "APP_NAME"
+    dir_module = DIR_REPO / "src" / "app_name"
     if dir_module.exists():
         dir_module.rename(dir_module.parent / module_name)
 
