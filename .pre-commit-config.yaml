@@ -20,7 +20,7 @@ repos:
     - --autofix
     - --indent=2
   - id: pretty-format-toml
-    exclude: ^poetry.lock$
+    exclude: ^uv.lock$
     args:
     - --autofix
     - --indent=2
