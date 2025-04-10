@@ -1,1 +1,1 @@
-"""This is the ogl viewer submodule for using the ogl package."""
+"""This is the ogl viewer submodule for using the opengl package."""
