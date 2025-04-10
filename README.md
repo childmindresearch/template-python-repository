@@ -4,7 +4,7 @@
 
 Welcome to the CMI-DAIR Template Python Repository! This template is designed to streamline your project setup and ensure a consistent structure. To get started, follow these steps:
 
-- [ ] Run `setup_template.py` to initialize the repository.
+- [x] Run `setup_template.py` to initialize the repository.
 - [ ] Replace the content of this `README.md` with details specific to your project.
 - [ ] Install the `pre-commit` hooks to ensure code quality on each commit.
 - [ ] Revise SECURITY.md to reflect supported versions or remove it if not applicable.
@@ -15,12 +15,12 @@ Welcome to the CMI-DAIR Template Python Repository! This template is designed to
 
 # Project name
 
-[![Build](https://github.com/childmindresearch/template-python-repository/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/childmindresearch/template-python-repository/actions/workflows/test.yaml?query=branch%3Amain)
-[![codecov](https://codecov.io/gh/childmindresearch/template-python-repository/branch/main/graph/badge.svg?token=22HWWFWPW5)](https://codecov.io/gh/childmindresearch/template-python-repository)
+[![Build](https://github.com/childmindresearch/mobi_motion_tracking_zed/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/childmindresearch/mobi_motion_tracking_zed/actions/workflows/test.yaml?query=branch%3Amain)
+[![codecov](https://codecov.io/gh/childmindresearch/mobi_motion_tracking_zed/branch/main/graph/badge.svg?token=22HWWFWPW5)](https://codecov.io/gh/childmindresearch/mobi_motion_tracking_zed)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 ![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/childmindresearch/template-python-repository/blob/main/LICENSE)
-[![pages](https://img.shields.io/badge/api-docs-blue)](https://childmindresearch.github.io/template-python-repository)
+[![LGPL--2.1 License](https://img.shields.io/badge/license-LGPL--2.1-blue.svg)](https://github.com/childmindresearch/mobi_motion_tracking_zed/blob/main/LICENSE)
+[![pages](https://img.shields.io/badge/api-docs-blue)](https://childmindresearch.github.io/mobi_motion_tracking_zed)
 
 What problem does this tool solve?
 
@@ -41,7 +41,7 @@ pip install APP_NAME
 Or get the newest development version via:
 
 ```sh
-pip install git+https://github.com/childmindresearch/template-python-repository
+pip install git+https://github.com/childmindresearch/mobi_motion_tracking_zed
 ```
 
 ## Quick start

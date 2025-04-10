@@ -2,7 +2,7 @@
 
 import pytest
 
-from app_name import algorithms
+from mobi_motion_tracking_zed import algorithms
 
 
 def test_fibonacci_success_0() -> None:

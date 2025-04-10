@@ -1,4 +1,4 @@
-"""Example functions for app_name."""
+"""Example functions for mobi_motion_tracking_zed."""
 
 
 def fibonacci(n: int) -> int:

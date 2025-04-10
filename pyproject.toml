@@ -1,9 +1,9 @@
 [project]
-name = "app-name"
+name = "mobi_motion_tracking_zed"
 version = "0.1.0"
-description = "A beautiful description."
+description = "Necessary code to record motion tracking data from the zed 2i with or without a stimulus."
 authors = [
-  {name = "Reinder Vos de Wael", email = "reinder.vosdewael@childmind.org"}
+  {name = "cgmaiorano", email = "celiagrace13@gmail.com"}
 ]
 license = "LGPL-2.1"
 readme = "README.md"
