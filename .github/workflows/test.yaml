@@ -10,17 +10,8 @@ jobs:
   unit:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Install uv
-      uses: astral-sh/setup-uv@v5
-      with:
-        enable-cache: true
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version-file: pyproject.toml
-    - name: Install the project
-      run: uv sync --only-dev
+    - name: Setup venv
+      uses: ./.github/actions/setup_venv.yaml
     - name: Run tests
       id: run-tests
       run: >
@@ -40,17 +31,10 @@ jobs:
   ruff:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Install uv
-      uses: astral-sh/setup-uv@v5
+    - name: Setup venv
+      uses: ./.github/actions/setup_venv.yaml
       with:
-        enable-cache: true
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version-file: pyproject.toml
-    - name: Install the project
-      run: uv sync --only-dev
+        only-dev: true
     - name: Ruff format
       run: uv run ruff format --check
     - name: Ruff check
@@ -59,16 +43,15 @@ jobs:
   mypy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Install uv
-      uses: astral-sh/setup-uv@v5
-      with:
-        enable-cache: true
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version-file: pyproject.toml
-    - name: Install the project
-      run: uv sync --only-dev
+    - name: Setup venv
+      uses: ./.github/actions/setup_venv.yaml
     - run: |
         uv run mypy .
+
+  deptry:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup venv
+      uses: ./.github/actions/setup_venv.yaml
+    - run: |-
+        uv run deptry ./src
