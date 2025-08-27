@@ -10,7 +10,7 @@ Welcome to the CMI-DAIR Template Python Repository! This template is designed to
 - [ ] Revise SECURITY.md to reflect supported versions or remove it if not applicable.
 - [ ] Remove the placeholder src and test files, these are there merely to show how the CI works.
 - [ ] If it hasn't already been done for your organization/acccount, grant third-party app permissions for CodeCov.
-- [ ] To set up an API documentation website, after the first successful build, go to the `Settings` tab of your repository, scroll down to the `GitHub Pages` section, and select `gh-pages` as the source. This will generate a link to your API docs.
+- [ ] To set up an API documentation website, go to the `Settings` tab of your repository, scroll down to the `GitHub Pages` section, and select `GitHub Actions` as the source. This will generate a link to your API docs.
 - [ ] Update stability badge in `README.md` to reflect the current state of the project. A list of stability badges to copy can be found [here](https://github.com/orangemug/stability-badges). The [node documentation](https://nodejs.org/docs/latest-v20.x/api/documentation.html#documentation_stability_index) can be used as a reference for the stability levels.
 
 # Project name
