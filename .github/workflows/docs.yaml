@@ -18,6 +18,8 @@ on:
     - completed
     branches:
     - main
+  workflow_dispatch:
+
 
 jobs:
   build-and-publish-docs:
