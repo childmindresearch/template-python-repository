@@ -1,11 +1,19 @@
 name: Build and publish docs
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+  # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+  group: "pages"
+  cancel-in-progress: false
 
 on:
   workflow_run:
-    workflows: [Python Tests]
+    workflows: [ Python Tests ]
     types:
     - completed
     branches:
@@ -15,6 +23,9 @@ jobs:
   build-and-publish-docs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
     - uses: actions/checkout@v4
     - name: Install uv
@@ -31,7 +42,12 @@ jobs:
       run: |
         APP_MODULE_NAME=$(ls src -U | head -1)  # Get the first module name in the src directory
         uv run pdoc src/"$APP_MODULE_NAME" -o docs_build -t docs/pdoc-theme --docformat google
-        touch docs_build/.nojekyll
-    - uses: JamesIves/github-pages-deploy-action@v4
+    - name: Setup Pages
+      uses: actions/configure-pages@v5
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v4
       with:
-        folder: docs_build
+        path: './docs_build'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
