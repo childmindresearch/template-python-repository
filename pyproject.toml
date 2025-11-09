@@ -5,7 +5,7 @@ description = "A beautiful description."
 authors = [
   {name = "CMI DAIR", email = "dair@childmind.org"}
 ]
-license = "LGPL-2.1"
+license = "LGPL-2.1-only"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []

@@ -27,8 +27,15 @@ def get_license(name: str) -> dict[str, str]:
     if name not in LICENSES:
         raise ValueError(f"License {name} is not in {LICENSES}.")
     with request.urlopen(f"https://api.github.com/licenses/{name}") as response:
-        license_info = response.read().decode()
-    return json.loads(license_info)
+        license_info_response = response.read().decode()
+    license_info = json.loads(license_info_response)
+    # The following SPDX identifiers have been deprecated which broke builds.
+    # Remove once GitHub updates their API or we come up with better solution.
+    license_info["spdx_id"] = {
+        "LGPL-2.1": "LGPL-2.1-only",
+        "LGPL-3.0": "LGPL-3.0-only",
+    }.get(license_info["spdx_id"], license_info["spdx_id"])
+    return license_info
 
 
 def modify_license_placeholder_text(selected_license: dict[str, str]) -> dict[str, str]:
