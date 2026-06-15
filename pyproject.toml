@@ -16,7 +16,7 @@ dev = [
   "mypy>=2.1.0",
   "pre-commit>=4.6.0",
   "pytest-cov>=7.1.0",
-  "ruff>=0.15.14",
+  "ruff>=0.15.15",
   "deptry>=0.25.1"
 ]
 docs = ["pdoc>=16.0.0"]
@@ -47,5 +47,5 @@ convention = "google"
 "tests/**/*.py" = []
 
 [build-system]
-requires = ["uv_build>=0.11.16,<0.12.0"]
+requires = ["uv_build>=0.11.18,<0.12.0"]
 build-backend = "uv_build"
