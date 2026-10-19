@@ -3,7 +3,7 @@ name = "app-name"
 version = "0.1.0"
 description = "A beautiful description."
 authors = [
-  {name = "CMI DAIR", email = "dair@childmind.org"}
+  { name = "CMI DAIR", email = "dair@childmind.org" }
 ]
 license = "LGPL-2.1-only"
 readme = "README.md"
